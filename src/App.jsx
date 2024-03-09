@@ -12,7 +12,7 @@ function App() {
     <>
       <Tareas listaTareas={tareasList} setListaTareas={setTareasList}/>
    
-      <h1 className='text-pretty text-4xl m-4'>Lista tareas</h1>
+      
       <ListaTareas listaTareas={tareasList}/>
 
     </>

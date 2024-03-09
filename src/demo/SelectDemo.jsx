@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/select"
 
 export function SelectDemo({ valuef, onChangeFn }) {
-  
+
     return (
         <Select onValueChange={onChangeFn}>
             <SelectTrigger className="w-[180px]">
