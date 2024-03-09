@@ -3,12 +3,12 @@ import TareaCard from "./TareaCard";
 
 const ListaTareas = ({ listaTareas }) => {
   return (
-    <div className="flex  justify-center items-center"> 
+    <div className="flex  justify-center items-center flex-wrap"> 
     
-      {listaTareas.map((tarea) => (
+      {listaTareas.map((tarea, i) => (
         <TareaCard
         tarea={tarea}
-          key={tarea.id} 
+          key={i} 
           titulo={tarea.titulo}
           descripcion={tarea.description} 
           prioridad={tarea.prioridad}
