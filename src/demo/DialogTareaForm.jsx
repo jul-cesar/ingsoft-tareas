@@ -84,7 +84,7 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
                                     </FormItem>
                                 )} />
                             </div>
-                            <div className=" text-start space-y-1.5 space-x-1.5">
+                            <div className=" text-start space-x-1.5">
                                 <FormField name="description" control={form.control} render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>
@@ -98,38 +98,39 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
                                 )} />
                             </div>
 
-
-                            <div className="text-start space-y-1.5 space-x-1.5">
-                                <FormField name="fecha" control={form.control} render={({ field }) => (
-                                    <FormItem>
-
-
-
-
+                            <FormField control={form.control} name="prioridad" render={({ field: { value, onChange } }) => (
+                                <FormItem>
+                                    <FormLabel>
+                                        Prioridad
                                         <FormControl>
-
-                                            <DatePickerDemo {...field} id="fecha" valuef={field.value} onChangef={field.onChange} />
-
+                                            <SelectDemo valuef={value} onChangeFn={onChange} />
                                         </FormControl>
-
                                         <FormMessage />
+                                    </FormLabel>
+                                </FormItem>
+                            )} />
 
-                                    </FormItem>
-                                )} />
 
-                                <FormField control={form.control} name="prioridad" render={({ field: { value, onChange } }) => (
-                                    <FormItem>
-                                        <FormLabel>
-                                            Prioridad
-                                            <FormControl>
-                                                <SelectDemo valuef={value} onChangeFn={onChange} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormLabel>
-                                    </FormItem>
-                                )} />
 
-                            </div>
+                            <FormField name="fecha" control={form.control} render={({ field }) => (
+                                <FormItem>
+
+
+
+
+                                    <FormControl>
+
+                                        <DatePickerDemo {...field} id="fecha" valuef={field.value} onChangef={field.onChange} />
+
+                                    </FormControl>
+
+                                    <FormMessage />
+
+                                </FormItem>
+                            )} />
+
+
+
                         </div>
                     </form>
                 </Form>
