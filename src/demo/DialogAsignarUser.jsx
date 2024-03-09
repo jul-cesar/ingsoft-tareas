@@ -12,10 +12,11 @@ import {
 import { SelectForm } from "./SelectAsignarUser"
 import { useState } from "react"
 
-export function DialogDemo({ name }) {
+export function DialogAsignarUser({ name, userAsign }) {
+ 
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     return (
-        <Dialog className="" open={isDialogOpen} onOpenChange={(open)=>setIsDialogOpen(open)}>
+        <Dialog className="" open={isDialogOpen} onOpenChange={(open) => setIsDialogOpen(open)}>
             <DialogTrigger asChild>
                 <Button variant="outline">Asignar usuario </Button>
             </DialogTrigger>
@@ -26,14 +27,9 @@ export function DialogDemo({ name }) {
                         Al asignar una tarea xdxdxd
                     </DialogDescription>
                 </DialogHeader>
-              
-
-                    <SelectForm setIsOpenDialog={setIsDialogOpen}/>
-
-
-               
+                <SelectForm currentTarea={name} setIsOpenDialog={setIsDialogOpen} userAsign={userAsign} />
                 <DialogFooter>
-                 
+
                 </DialogFooter>
             </DialogContent>
         </Dialog>

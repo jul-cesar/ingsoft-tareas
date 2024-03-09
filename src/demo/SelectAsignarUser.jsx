@@ -21,23 +21,26 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { toast } from "sonner"
 
 
 const FormSchema = z.object({
-    email: z
+    userAsignado: z
         .string({
             required_error: "Por favor, selecciona un usuario",
         })
 
 })
 
-export function SelectForm({setIsOpenDialog}) {
+export function SelectForm({ setIsOpenDialog, userAsign, currentTarea }) {
+
     const form = useForm({
         resolver: zodResolver(FormSchema),
     })
 
     function onSubmit(data) {
-        console.log(data)
+        toast.success(`Asignaste ${data.userAsignado} a la tarea ${currentTarea}`)
+        userAsign(data.userAsignado)
         setIsOpenDialog(false)
     }
 
@@ -46,7 +49,7 @@ export function SelectForm({setIsOpenDialog}) {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
                     control={form.control}
-                    name="email"
+                    name="userAsignado"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Usuario</FormLabel>

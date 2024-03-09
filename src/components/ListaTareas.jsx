@@ -1,16 +1,17 @@
 import React from "react";
-import TareaCard from "./TareaCard";
+
+import { CardTarea } from "@/demo/CardTarea";
 
 const ListaTareas = ({ listaTareas }) => {
   return (
-    <div className="flex  justify-center items-center flex-wrap"> 
-    
+    <div className="flex  justify-center items-center flex-wrap">
+
       {listaTareas.map((tarea, i) => (
-        <TareaCard
-        tarea={tarea}
-          key={i} 
+        <CardTarea
+          tarea={tarea}
+          key={i}
           titulo={tarea.titulo}
-          descripcion={tarea.description} 
+          descripcion={tarea.description}
           prioridad={tarea.prioridad}
           fecha={tarea.fecha}
           estado={tarea.estado}
