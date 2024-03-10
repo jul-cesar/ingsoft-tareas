@@ -13,22 +13,31 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { BadgeEstado } from "@/demo/BedgeEstado"
 import { DialogAsignarUser } from "./DialogAsignarUser"
+import { DrawerDialogDemo } from "./AddComent"
+import { format } from "date-fns"
 
 
 
 export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
 
   const [userAsignado, setUserAsignado] = React.useState()
+  const now = new Date()
+
+  const [fechaCreacion, setFechaCreacion] = React.useState(format(now, "d 'de' MMMM 'a las' H:m"))
+
+
 
   const userAsign = (data) => {
     setUserAsignado(data)
   }
   return (
-    <Card className="w-[350px] m-4">
+    <Card className="max-w-[350px] ">
       <CardHeader>
-        <CardTitle>{titulo}</CardTitle>
+        <CardTitle >{titulo}</CardTitle>
+        <CardDescription>Creada: {fechaCreacion}</CardDescription>
         {userAsignado && <CardDescription>Asignada a: {userAsignado} </CardDescription>}
-        <CardDescription>{descripcion.toUpperCase()}</CardDescription>
+        <CardDescription>{descripcion}</CardDescription>
+
 
       </CardHeader>
       <div className="flex items-center justify-between gap-2 m-4">
@@ -50,7 +59,7 @@ export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
 
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col items-center space-y-2">
-              <Label htmlFor="name">Fecha:</Label>
+              <Label htmlFor="name">Fecha de vencimiento:</Label>
               <BadgeEstado variant="secondary">{fecha.toUpperCase()}</BadgeEstado>
 
             </div>
@@ -64,8 +73,12 @@ export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <DialogAsignarUser userAsign={userAsign} name={titulo}  />
+        <DrawerDialogDemo namet={titulo} />
+        <DialogAsignarUser userAsign={userAsign} name={titulo
+        } />
+
         <Button className="self-end">Editar</Button>
+
       </CardFooter>
     </Card>
   )

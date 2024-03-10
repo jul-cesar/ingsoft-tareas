@@ -18,7 +18,7 @@ export function DialogAsignarUser({ name, userAsign }) {
     return (
         <Dialog className="" open={isDialogOpen} onOpenChange={(open) => setIsDialogOpen(open)}>
             <DialogTrigger asChild>
-                <Button variant="outline">Asignar usuario </Button>
+                <Button variant="outline">Asignar </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] max-w-[300px]">
                 <DialogHeader>

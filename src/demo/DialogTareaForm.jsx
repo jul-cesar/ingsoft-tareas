@@ -18,17 +18,18 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import React, { useState } from "react"
+import { format } from "date-fns"
 
 export function DialogTareaForm({ listaTareas, setListaTareas }) {
     const [open, setOpen] = useState(false);
-
+ 
 
     const formScheme = z.object({
-        titulo: z.string().min(4, { message: "minimo 4 caracteres" }),
-        description: z.string({ required_error: "Se requiere una descripcion" }).min(4, { message: "minimo 4 caracteres" }),
+        titulo: z.string().min(4, { message: "minimo 4 caracteres" }).max(44, { message: "Maximo 44 caracteres" }),
+        description: z.string({ required_error: "Se requiere una descripcion" }).min(4, { message: "minimo 4 caracteres" }).max(220, { message: "Maximo 220 caracteres" }),
         prioridad: z.string({ required_error: "Por favor, elige una prioridad" }).min(1, { message: "Por favor elige una prioridad" }),
         fecha: z.string({ required_error: "Fecha necesaria" }).min(1, { message: "Por favor selecciona una fecha" }),
-        estado: z.string({ required_error: "Fecha necesaria" })
+        estado: z.string({ required_error: "Fecha necesaria" }),
 
     })
 
@@ -39,7 +40,8 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
             description: "",
             fecha: "",
             prioridad: "",
-            estado: "disponible"
+            estado: "pendiente",
+
         },
         mode: "onChange"
 

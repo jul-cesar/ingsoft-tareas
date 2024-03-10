@@ -1,14 +1,14 @@
 import React from 'react'
-import FromCreateTarea from '../components/FromCreateTarea'
-import ListaTareas from '../components/ListaTareas'
+import TareasManagement from '../components/TareasManagement'
 
-const Tareas = ({listaTareas, setListaTareas}) => {
+
+const Tareas = ({ listaTareas, setListaTareas }) => {
   return (
-    <div className=' flex justify-center items-center'>
-    <FromCreateTarea listaTareas={listaTareas} setListaTareas={setListaTareas}/>
-  
+    <div className="flex flex-row h-full  justify-center " >
+      <TareasManagement listaTareas={listaTareas} setListaTareas={setListaTareas} />
+
     </div>
-       
+
 
   )
 }

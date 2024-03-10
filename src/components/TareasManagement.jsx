@@ -3,21 +3,16 @@ import React, { useState } from "react";
 import { Toaster, toast } from "sonner";
 
 import { DialogTareaForm } from "@/demo/DialogTareaForm";
+import Navbar from "./Navbar";
 
-const FromCreateTarea = ({ listaTareas, setListaTareas }) => {
+const TareasManagement = ({ listaTareas, setListaTareas }) => {
 
   return (
-    <div className="">
+    <div className="w-full flex justify-center mt-20">
       <Toaster />
-
-
-
       <DialogTareaForm listaTareas={listaTareas} setListaTareas={setListaTareas} />
-
-
-
     </div>
   );
 };
 
-export default FromCreateTarea;
+export default TareasManagement;
