@@ -61,7 +61,7 @@ export function DrawerDialogDemo({namet}) {
           Agrega notas o comentarios sobre el progreso de esta tarea
           </DrawerDescription>
         </DrawerHeader>
-        <ProfileForm className="px-4" />
+        <ProfileForm className="px-4" namet={namet} />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -76,7 +76,7 @@ function ProfileForm({ className, namet }) {
   return (
     <form className={cn("grid items-start gap-4", className)}>
       <div className="grid gap-2">
-        <Label htmlFor="email">Haz un comentario para "{namet}"</Label>
+        <Label htmlFor="email">Haz un comentario para "{namet}" </Label>
         <Textarea type="email" id="email"  />
       </div>
 
