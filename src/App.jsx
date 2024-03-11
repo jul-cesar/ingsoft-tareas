@@ -6,6 +6,7 @@ import { AuthFunction } from "./context/authContext.jsx";
 import Login from "./pages/Login";
 import { Route, Routes } from "react-router-dom";
 import Register from "./pages/Register";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   const [tareasList, setTareasList] = useState([]);
@@ -18,7 +19,13 @@ function App() {
         <Route
           path="/"
           element={
-            <Tareas listaTareas={tareasList} setListaTareas={setTareasList} />
+            <ProtectedRoute>
+           
+              <Tareas
+                listaTareas={tareasList}
+                setListaTareas={setTareasList}
+              />
+            </ProtectedRoute>
           }
         />
       </Routes>

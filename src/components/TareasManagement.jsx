@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { Toaster, toast } from "sonner";
 
 import { DialogTareaForm } from "@/demo/DialogTareaForm";
-import Navbar from "./Navbar";
-import { Label } from "@radix-ui/react-label";
 
 const TareasManagement = ({ listaTareas, setListaTareas }) => {
   return (
     <div className="w-full flex justify-center mt-20">
-      
       <Toaster />
 
       <DialogTareaForm

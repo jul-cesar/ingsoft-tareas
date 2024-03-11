@@ -1,3 +1,4 @@
+import { createUserFn } from "@/api/createUser";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,16 +14,16 @@ import { Label } from "@/components/ui/label";
 import { Auth } from "@/context/authContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const Register = () => {
   const navigate = useNavigate();
 
-  const { createUser, googleAuth } = useContext(Auth);
+  const { createUser, googleAuth, currentUser } = useContext(Auth);
   const formScheme = z.object({
     email: z
       .string()
@@ -38,10 +39,17 @@ const Register = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async (data) => {
   
+  useEffect(() => {
+    if (currentUser != null) {
+      navigate("/");
+    }
+  }, [currentUser]);
+
+  const onSubmit = async (data) => {
     try {
       await createUser(data.email, data.password);
+      createUserFn({nombre: data.email, email: data.email})
       navigate("/");
     } catch (err) {
       console.log(err.message);
@@ -96,15 +104,21 @@ const Register = () => {
                 </FormItem>
               )}
             />
-              <div className="flex flex-col justify-center items-center m-4 gap-2">
-              <Button className="">Ingresar</Button>
+            <div className="flex flex-col justify-center items-center m-4 gap-2">
+            <Link className="self-start" to={"/login"}>Inicia sesion</Link>
+              <Button className="">Registrarme</Button>
 
               <Label> O</Label>
 
-              <button type="button" onClick={()=>{
-                    googleAuth()
-                    navigate("/")
-              }} class="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+
+                  googleAuth();
+                }}
+                class="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150"
+              >
                 <img
                   class="w-6 h-6"
                   src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -113,7 +127,7 @@ const Register = () => {
                 />
                 <span>Inicia con Google</span>
               </button>
-              </div>
+            </div>
           </form>
         </Form>
       </div>

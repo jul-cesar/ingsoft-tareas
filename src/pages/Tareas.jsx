@@ -21,9 +21,7 @@ const Tareas = ({ listaTareas, setListaTareas }) => {
         <h2 className="font-bold">Hola!, {currentUser?.displayName}</h2>
       </div>
 
-      <div className="flex items-center justify-center h-screen">
-      {listaTareas.length < 1 && <p>Parece que no tienes tareas :/ </p>}
-      </div>
+     
 
       <ListaTareas listaTareas={listaTareas} />
     </div>

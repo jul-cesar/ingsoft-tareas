@@ -13,17 +13,16 @@ import { Label } from "@/components/ui/label";
 import { Auth } from "@/context/authContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const Login = () => {
-  const [isSigningIn, setIsSigningIn] = useState(false);
   const navigate = useNavigate();
 
-  const { logIn, googleAuth } = useContext(Auth);
+  const { logIn, googleAuth, currentUser } = useContext(Auth);
   const formScheme = z.object({
     email: z
       .string()
@@ -38,6 +37,12 @@ const Login = () => {
     resolver: zodResolver(formScheme),
     mode: "onChange",
   });
+
+  useEffect(() => {
+    if (currentUser != null) {
+      navigate("/");
+    }
+  }, [currentUser]);
 
   const onSubmit = async (data) => {
     try {
@@ -98,6 +103,9 @@ const Login = () => {
             />
 
             <div className="flex flex-col justify-center items-center m-4 gap-2">
+              <Link className="self-start" to={"/register"}>
+                Registrate
+              </Link>
               <Button className="">Ingresar</Button>
 
               <Label> O</Label>
@@ -106,13 +114,8 @@ const Login = () => {
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (!isSigningIn) {
-                    setIsSigningIn(true);
-                    googleAuth();
-                  }
-                  if(!isSigningIn){
-                    navigate("/")
-                  }
+
+                  googleAuth();
                 }}
                 class="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150"
               >
