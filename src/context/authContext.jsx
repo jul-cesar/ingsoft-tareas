@@ -23,13 +23,14 @@ export const AuthFunction = ({ children }) => {
   };
 
   const createUser = (email, password) => {
-   
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const googleAuth = async () => {
     const provider = new GoogleAuthProvider();
-    const response = await signInWithRedirect(auth, provider);
+    const response = await signInWithPopup(auth, provider).catch((error) =>
+      alert(error.message)
+    );
     return response;
   };
 
