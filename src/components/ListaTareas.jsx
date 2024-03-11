@@ -4,8 +4,7 @@ import { CardTarea } from "@/demo/CardTarea";
 
 const ListaTareas = ({ listaTareas }) => {
   return (
-    <div className="flex  justify-center  m-4 gap-4  flex-wrap">
-
+    <div className="flex items-center  justify-center m-4 gap-4  flex-wrap">
       {listaTareas.map((tarea, i) => (
         <CardTarea
           fechaCreacion={tarea.fechaCreacion}

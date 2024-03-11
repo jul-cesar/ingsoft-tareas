@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,37 +8,34 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { BadgeEstado } from "@/demo/BedgeEstado"
-import { DialogAsignarUser } from "./DialogAsignarUser"
-import { DrawerDialogDemo } from "./AddComent"
-import { format } from "date-fns"
-
-
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { BadgeEstado } from "@/demo/BedgeEstado";
+import { DialogAsignarUser } from "./DialogAsignarUser";
+import { DrawerDialogDemo } from "./AddComent";
+import { format } from "date-fns";
 
 export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
+  const [userAsignado, setUserAsignado] = React.useState();
+  const now = new Date();
 
-  const [userAsignado, setUserAsignado] = React.useState()
-  const now = new Date()
-
-  const [fechaCreacion, setFechaCreacion] = React.useState(format(now, "d 'de' MMMM 'a las' H:m"))
-
-
+  const [fechaCreacion, setFechaCreacion] = React.useState(
+    format(now, "d 'de' MMMM 'a las' H:m")
+  );
 
   const userAsign = (data) => {
-    setUserAsignado(data)
-  }
+    setUserAsignado(data);
+  };
   return (
     <Card className="max-w-[350px] ">
       <CardHeader>
-        <CardTitle >{titulo}</CardTitle>
+        <CardTitle>{titulo}</CardTitle>
         <CardDescription>Creada: {fechaCreacion}</CardDescription>
-        {userAsignado && <CardDescription>Asignada a: {userAsignado} </CardDescription>}
+        {userAsignado && (
+          <CardDescription>Asignada a: {userAsignado} </CardDescription>
+        )}
         <CardDescription>{descripcion}</CardDescription>
-
-
       </CardHeader>
       <div className="flex items-center justify-between gap-2 m-4">
         <div className="p-2">
@@ -49,37 +46,27 @@ export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
           <Label>Prioridad: </Label>
           <BadgeEstado>{prioridad.toUpperCase()}</BadgeEstado>
         </div>
-
       </div>
 
-
       <CardContent>
-
         <form>
-
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col items-center space-y-2">
               <Label htmlFor="name">Fecha de vencimiento:</Label>
-              <BadgeEstado variant="secondary">{fecha.toUpperCase()}</BadgeEstado>
-
+              <BadgeEstado variant="secondary">
+                {fecha.toUpperCase()}
+              </BadgeEstado>
             </div>
-            <div className="flex flex-col space-y-1.5">
-
-
-            </div>
-
+            <div className="flex flex-col space-y-1.5"></div>
           </div>
-
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
         <DrawerDialogDemo namet={titulo} />
-        <DialogAsignarUser userAsign={userAsign} name={titulo
-        } />
+        <DialogAsignarUser userAsign={userAsign} name={titulo} />
 
         <Button className="self-end">Editar</Button>
-
       </CardFooter>
     </Card>
-  )
+  );
 }
