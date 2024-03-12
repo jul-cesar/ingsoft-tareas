@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signInWithRedirect,
   signOut,
 } from "firebase/auth";
@@ -35,7 +36,7 @@ export const AuthFunction = ({ children }) => {
 
   const googleAuth = async () => {
     const provider = new GoogleAuthProvider();
-    const response = await signInWithRedirect(auth, provider).catch((error) =>
+    const response = await signInWithPopup(auth, provider).catch((error) =>
       alert(error.message)
     );
     return response;

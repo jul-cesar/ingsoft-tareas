@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { getAllUsers } from "@/api/getAllUsers";
+import { useQuery } from "@tanstack/react-query";
 
 const FormSchema = z.object({
   userAsignado: z.string({
@@ -30,8 +31,12 @@ const FormSchema = z.object({
   }),
 });
 
-
 export function SelectForm({ setIsOpenDialog, userAsign, currentTarea }) {
+  const { data: listaUsuarios } = useQuery({
+    queryKey: ["listaUsuarios"],
+    queryFn: async () => await getAllUsers(),
+  });
+
   const form = useForm({
     resolver: zodResolver(FormSchema),
   });
@@ -58,9 +63,10 @@ export function SelectForm({ setIsOpenDialog, userAsign, currentTarea }) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="usuario1">usuario 1</SelectItem>
-                  <SelectItem value="usuario2">usuario 2</SelectItem>
-                  <SelectItem value="usuario3">usuario 3</SelectItem>
+                  {Array.isArray(listaUsuarios) &&
+                    listaUsuarios.map((user) => (
+                      <SelectItem value="usuario1">{user.nombre}</SelectItem>
+                    ))}
                 </SelectContent>
               </Select>
               <FormDescription>
