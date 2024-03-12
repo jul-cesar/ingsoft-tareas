@@ -22,12 +22,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { getAllUsers } from "@/api/getAllUsers";
 
 const FormSchema = z.object({
   userAsignado: z.string({
     required_error: "Por favor, selecciona un usuario",
   }),
 });
+
 
 export function SelectForm({ setIsOpenDialog, userAsign, currentTarea }) {
   const form = useForm({

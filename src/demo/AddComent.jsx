@@ -50,7 +50,7 @@ export function DrawerDialogDemo({ namet, tareaInfo }) {
       <DialogTrigger asChild>
         <Button variant="outline">+ Comentar</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] h-screen overflow-auto">
+      <DialogContent className="sm:max-w-[425px] h-5/6 overflow-auto">
         <DialogHeader>
           <DialogTitle>Comentarios</DialogTitle>
           <DialogDescription>
@@ -145,16 +145,12 @@ function ProfileForm({ className, namet, tareaInfo }) {
                   <span class="text-sm font-semibold text-gray-900 dark:text-white">
                     {}
                   </span>
-                  <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                    
-                  </span>
+                  <span class="text-sm font-normal text-gray-500 dark:text-gray-400"></span>
                 </div>
                 <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
                   {comentario.contenido}
                 </p>
-                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-               
-                </span>
+                <span class="text-sm font-normal text-gray-500 dark:text-gray-400"></span>
               </div>
             </div>
           ))}
