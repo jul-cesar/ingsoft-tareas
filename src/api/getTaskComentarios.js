@@ -1,6 +1,6 @@
 export const getTaskComentarios = async (id) => {
   try {
-    const response = await fetch(`https://task-api-tau.vercel.app/${id}/`);
+    const response = await fetch(`https://task-api-tau.vercel.app/${id}`);
     if (!response.ok) {
       throw new Error(`Server responded with status: ${response.status}`);
     }
