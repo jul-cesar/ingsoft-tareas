@@ -1,6 +1,6 @@
 export const updateTarea = async (id, dataTarea) => {
   try {
-    const response = await fetch(`http://localhost:3001/${id}`, {
+    const response = await fetch(`https://task-api-tau.vercel.app/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { BadgeEstado } from "@/demo/BedgeEstado";
 import { DialogAsignarUser } from "./DialogAsignarUser";
 import { DrawerDialogDemo } from "./AddComent";
-import { format } from "date-fns";
+import { format, formatISO } from "date-fns";
 import { DialogEditarTarea } from "./DialogEditarTarea";
 import { DropdownMenuDemo } from "./Dropdown";
 
@@ -25,13 +25,26 @@ export function CardTarea({
   estado,
   prioridad,
   tareaInfo,
+  createdAt,
 }) {
   const [userAsignado, setUserAsignado] = React.useState();
   const now = new Date();
 
   const [fechaCreacion, setFechaCreacion] = React.useState(
-    format(now, "d 'de' MMMM 'a las' H:m")
+    format(now, "d 'de' MMM' a las' h:mm")
   );
+
+  function formatCustomDate(datex) {
+    const date = new Date(datex);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses van de 0 a 11, así que se suma 1
+    const day = String(date.getDate()).padStart(2, '0');
+    const hour = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+ 
+    return `${year} ${month} ${day} / ${hour}:${minutes}`;
+}
 
   const userAsign = (data) => {
     setUserAsignado(data);
@@ -42,13 +55,12 @@ export function CardTarea({
     <Card className="max-w-[350px] ">
       <CardHeader>
         <CardTitle>
-          
           <div className="flex justify-between">
-          {titulo}
-            <DropdownMenuDemo tareaInfo={tareaInfo}/>
+            {titulo}
+            <DropdownMenuDemo tareaInfo={tareaInfo} />
           </div>
         </CardTitle>
-        <CardDescription>Creada: {fechaCreacion}</CardDescription>
+        <CardDescription>Creada: {formatCustomDate(createdAt)}</CardDescription>
         {userAsignado && (
           <CardDescription>Asignada a: {userAsignado} </CardDescription>
         )}
@@ -71,7 +83,7 @@ export function CardTarea({
             <div className="flex flex-col items-center space-y-2">
               <Label htmlFor="name">Fecha de vencimiento:</Label>
               <BadgeEstado variant="secondary">
-                {fecha?.toUpperCase()}
+                {fecha?.split("T")[0].toUpperCase()}
               </BadgeEstado>
             </div>
             <div className="flex flex-col space-y-1.5"></div>

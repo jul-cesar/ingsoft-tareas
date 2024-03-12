@@ -1,4 +1,4 @@
-import { CreditCard, Trash, User } from "lucide-react";
+import { CreditCard, EllipsisVertical, Trash, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,10 +12,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTarea } from "@/api/deleteTarea";
 
 export function DropdownMenuDemo({ tareaInfo }) {
+  const queryClient = useQueryClient();
   const { mutate, isPending, isError, isSuccess } = useMutation({
     mutationFn: async (newTarea) => {
       console.log(newTarea, "new");
@@ -28,7 +29,7 @@ export function DropdownMenuDemo({ tareaInfo }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Open</Button>
+        <EllipsisVertical />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Opciones</DropdownMenuLabel>
@@ -41,9 +42,9 @@ export function DropdownMenuDemo({ tareaInfo }) {
               <span>Ver comentarios</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={mutate}>
             <Trash className="mr-2 h-4 w-4" />
-            <span onClick={()=>mutate()}>Eliminar</span>
+            <span >Eliminar</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

@@ -1,6 +1,6 @@
 export const deleteTarea = async (id) => {
   try {
-    const response = await fetch(`http://localhost:3001/${id}`, {
+    const response = await fetch(`https://task-api-tau.vercel.app/${id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 export const getUserWithEmail = async (email) => {
   try {
-    const response = await fetch(`http://localhost:3001/user/${email}`);
+    const response = await fetch(`https://task-api-tau.vercel.app/${email}/`);
     if (!response.ok) {
       throw new Error(`Server responded with status: ${response.status}`);
     }

@@ -1,6 +1,6 @@
 export const createComentario = async (dataComentario) => {
   try {
-    const response = await fetch("http://localhost:3001/comentario", {
+    const response = await fetch("https://task-api-tau.vercel.app/comentario/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

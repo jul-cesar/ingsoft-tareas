@@ -1,6 +1,6 @@
 export const createTarea = async (dataTarea) => {
   try {
-    const response = await fetch("http://localhost:3001/", {
+    const response = await fetch("https://task-api-tau.vercel.app/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

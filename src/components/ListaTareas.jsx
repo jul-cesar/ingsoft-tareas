@@ -8,9 +8,10 @@ const ListaTareas = ({ listaTareas }) => {
       {Array.isArray(listaTareas) &&
         listaTareas.map((tarea, i) => (
           <CardTarea
-          tareaInfo={tarea}
+            tareaInfo={tarea}
             fechaCreacion={tarea.fechaCreacion}
             tarea={tarea}
+            createdAt={tarea.createdAt}
             key={i}
             titulo={tarea.titulo}
             descripcion={tarea.description}

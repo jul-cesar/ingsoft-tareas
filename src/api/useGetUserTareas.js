@@ -9,7 +9,7 @@ const useGetUserTareas = () => {
       return null;
     }
     console.log(uid, "xdddd");
-    const response = await fetch(`http://localhost:3001/${uid}`);
+    const response = await fetch(`https://task-api-tau.vercel.app/${uid}/`);
     const data = await response.json();
     return data;
   };

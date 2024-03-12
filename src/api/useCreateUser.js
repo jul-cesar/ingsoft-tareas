@@ -7,7 +7,7 @@ export const useCreateUser = () => {
   const createUserFn = (data) => {
     console.log(data, "Data enviada a backend");
 
-    fetch("http://localhost:3001/user", {
+    fetch("https://task-api-tau.vercel.app/user/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
