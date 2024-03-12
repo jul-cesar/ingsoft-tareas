@@ -2,8 +2,7 @@ import { Auth } from "@/context/authContext";
 import { useContext } from "react";
 
 export const useCreateUser = () => {
-    
-  const  setCurrentUserDb  = useContext(Auth);
+  const setCurrentUserDb = useContext(Auth);
   const createUserFn = (data) => {
     console.log(data, "Data enviada a backend");
 
@@ -14,12 +13,11 @@ export const useCreateUser = () => {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => {
+      .then(async (response) => {
         if (response.ok) {
-          return response.json().then((user) => {
-            setCurrentUserDb(user);
-            console.log(user, "Usuario creado con éxito");
-          });
+          const user = await response.json();
+          setCurrentUserDb(user);
+          console.log(user, "Usuario creado con éxito");
         } else {
           console.error("Error en la respuesta del servidor", response.status);
           throw new Error(`Error en la solicitud: ${response.statusText}`);
