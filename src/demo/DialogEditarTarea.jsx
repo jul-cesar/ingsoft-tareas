@@ -26,15 +26,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import React, { useContext, useState } from "react";
 import { format } from "date-fns";
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTarea } from "@/api/createTarea";
 import { Auth } from "@/context/authContext";
+import { updateTarea } from "@/api/updateTarea";
+import { SelectEstado } from "./SelectEstadoTarea";
 
-export function DialogTareaForm({ listaTareas, setListaTareas }) {
+export function DialogEditarTarea({ tareaInfo }) {
   const [open, setOpen] = useState(false);
   const { currentUser } = useContext(Auth);
 
@@ -61,11 +59,11 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
   const form = useForm({
     resolver: zodResolver(formScheme),
     defaultValues: {
-      titulo: "",
-      descripcion: "",
-      fechaVencimiento: "",
-      prioridad: "",
-      estado: "pendiente",
+      titulo: tareaInfo.titulo,
+      descripcion: tareaInfo.descripcion,
+      fechaVencimiento: tareaInfo.fechaVencimiento,
+      prioridad: tareaInfo.prioridad,
+      estado: tareaInfo.estado,
     },
     mode: "onChange",
   });
@@ -77,7 +75,7 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
   const { mutate, isPending, isError, isSuccess } = useMutation({
     mutationFn: async (newTarea) => {
       console.log(newTarea, "new");
-      await createTarea(newTarea);
+      await updateTarea(tareaInfo.id, newTarea);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["listaTasks"] });
@@ -99,15 +97,12 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
   return (
     <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
       <DialogTrigger asChild>
-        <Button variant="outline">Nueva tarea</Button>
+        <Button variant="outline">Editar tarea</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Crea una tarea</DialogTitle>
-          <DialogDescription>
-            Llena la info de tu nueva tarea, una vez estes listo, presiona el
-            boton "Crear" y se agregara automaticamente a tu lista de tareas.
-          </DialogDescription>
+          <DialogTitle>Editar tarea</DialogTitle>
+          <DialogDescription>Edita los datos de tu tarea</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form>
@@ -162,6 +157,21 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
                       Prioridad
                       <FormControl>
                         <SelectDemo valuef={value} onChangeFn={onChange} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormLabel>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="estado"
+                render={({ field: { value, onChange } }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Estado
+                      <FormControl>
+                        <SelectEstado valuef={value} onChangeFn={onChange} />
                       </FormControl>
                       <FormMessage />
                     </FormLabel>

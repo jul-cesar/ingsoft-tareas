@@ -1,4 +1,4 @@
-import { createUserFn } from "@/api/createUser";
+import { useCreateUser } from "@/api/useCreateUser";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,7 +22,7 @@ import { z } from "zod";
 
 const Register = () => {
   const navigate = useNavigate();
-
+  const createUserFn = useCreateUser();
   const { createUser, googleAuth, currentUser } = useContext(Auth);
   const formScheme = z.object({
     email: z
@@ -39,7 +39,6 @@ const Register = () => {
     mode: "onChange",
   });
 
-  
   useEffect(() => {
     if (currentUser != null) {
       navigate("/");
@@ -49,7 +48,8 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       await createUser(data.email, data.password);
-      createUserFn({nombre: data.email, email: data.email})
+      const nombre = data.email.split("@")[0];
+      createUserFn({ nombre, email: data.email });
       navigate("/");
     } catch (err) {
       console.log(err.message);
@@ -105,7 +105,9 @@ const Register = () => {
               )}
             />
             <div className="flex flex-col justify-center items-center m-4 gap-2">
-            <Link className="self-start" to={"/login"}>Inicia sesion</Link>
+              <Link className="self-start" to={"/login"}>
+                Inicia sesion
+              </Link>
               <Button className="">Registrarme</Button>
 
               <Label> O</Label>

@@ -1,11 +1,10 @@
-export const createTarea = async (dataTarea) => {
+export const deleteTarea = async (id) => {
   try {
-    const response = await fetch("http://localhost:3001/", {
-      method: "POST",
+    const response = await fetch(`http://localhost:3001/${id}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(dataTarea),
     });
     const data = await response.json();
     return data;

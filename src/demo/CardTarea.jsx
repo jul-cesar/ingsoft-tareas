@@ -15,8 +15,17 @@ import { BadgeEstado } from "@/demo/BedgeEstado";
 import { DialogAsignarUser } from "./DialogAsignarUser";
 import { DrawerDialogDemo } from "./AddComent";
 import { format } from "date-fns";
+import { DialogEditarTarea } from "./DialogEditarTarea";
+import { DropdownMenuDemo } from "./Dropdown";
 
-export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
+export function CardTarea({
+  titulo,
+  descripcion,
+  fecha,
+  estado,
+  prioridad,
+  tareaInfo,
+}) {
   const [userAsignado, setUserAsignado] = React.useState();
   const now = new Date();
 
@@ -27,10 +36,18 @@ export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
   const userAsign = (data) => {
     setUserAsignado(data);
   };
+
+  const [open, setOpen] = React.useState(false);
   return (
     <Card className="max-w-[350px] ">
       <CardHeader>
-        <CardTitle>{titulo}</CardTitle>
+        <CardTitle>
+          
+          <div className="flex justify-between">
+          {titulo}
+            <DropdownMenuDemo tareaInfo={tareaInfo}/>
+          </div>
+        </CardTitle>
         <CardDescription>Creada: {fechaCreacion}</CardDescription>
         {userAsignado && (
           <CardDescription>Asignada a: {userAsignado} </CardDescription>
@@ -40,11 +57,11 @@ export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
       <div className="flex items-center justify-between gap-2 m-4">
         <div className="p-2">
           <Label>Estado: </Label>
-          <BadgeEstado>{estado.toUpperCase()}</BadgeEstado>
+          <BadgeEstado>{estado?.toUpperCase()}</BadgeEstado>
         </div>
         <div className="p-2">
           <Label>Prioridad: </Label>
-          <BadgeEstado>{prioridad.toUpperCase()}</BadgeEstado>
+          <BadgeEstado>{prioridad?.toUpperCase()}</BadgeEstado>
         </div>
       </div>
 
@@ -54,7 +71,7 @@ export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
             <div className="flex flex-col items-center space-y-2">
               <Label htmlFor="name">Fecha de vencimiento:</Label>
               <BadgeEstado variant="secondary">
-                {fecha.toUpperCase()}
+                {fecha?.toUpperCase()}
               </BadgeEstado>
             </div>
             <div className="flex flex-col space-y-1.5"></div>
@@ -62,10 +79,10 @@ export function CardTarea({ titulo, descripcion, fecha, estado, prioridad }) {
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <DrawerDialogDemo namet={titulo} />
+        <DrawerDialogDemo tareaInfo={tareaInfo} namet={titulo} />
         <DialogAsignarUser userAsign={userAsign} name={titulo} />
 
-        <Button className="self-end">Editar</Button>
+        <DialogEditarTarea tareaInfo={tareaInfo} />
       </CardFooter>
     </Card>
   );

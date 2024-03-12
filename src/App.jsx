@@ -9,8 +9,6 @@ import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
-  const [tareasList, setTareasList] = useState([]);
-
   return (
     <AuthFunction>
       <Routes>
@@ -20,11 +18,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-           
-              <Tareas
-                listaTareas={tareasList}
-                setListaTareas={setTareasList}
-              />
+              <Tareas />
             </ProtectedRoute>
           }
         />

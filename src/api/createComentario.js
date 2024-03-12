@@ -1,11 +1,11 @@
-export const createTarea = async (dataTarea) => {
+export const createComentario = async (dataComentario) => {
   try {
-    const response = await fetch("http://localhost:3001/", {
+    const response = await fetch("http://localhost:3001/comentario", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(dataTarea),
+      body: JSON.stringify(dataComentario),
     });
     const data = await response.json();
     return data;

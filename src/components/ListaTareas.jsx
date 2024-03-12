@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { CardTarea } from "@/demo/CardTarea";
 
 const ListaTareas = ({ listaTareas }) => {
   return (
     <div className="flex items-center  justify-center m-4 gap-4  flex-wrap">
-      {listaTareas.map((tarea, i) => (
-        <CardTarea
-          fechaCreacion={tarea.fechaCreacion}
-          tarea={tarea}
-          key={i}
-          titulo={tarea.titulo}
-          descripcion={tarea.description}
-          prioridad={tarea.prioridad}
-          fecha={tarea.fecha}
-          estado={tarea.estado}
-        />
-      ))}
+      {Array.isArray(listaTareas) &&
+        listaTareas.map((tarea, i) => (
+          <CardTarea
+          tareaInfo={tarea}
+            fechaCreacion={tarea.fechaCreacion}
+            tarea={tarea}
+            key={i}
+            titulo={tarea.titulo}
+            descripcion={tarea.description}
+            prioridad={tarea.prioridad}
+            fecha={tarea.fechaVencimiento}
+            estado={tarea.estado}
+          />
+        ))}
     </div>
   );
 };

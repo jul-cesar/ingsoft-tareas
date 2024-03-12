@@ -1,7 +1,7 @@
-export const createTarea = async (dataTarea) => {
+export const updateTarea = async (id, dataTarea) => {
   try {
-    const response = await fetch("http://localhost:3001/", {
-      method: "POST",
+    const response = await fetch(`http://localhost:3001/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
