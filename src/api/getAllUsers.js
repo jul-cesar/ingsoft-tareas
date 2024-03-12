@@ -1,6 +1,6 @@
 export const getAllUsers = async () => {
   try {
-    const response = await fetch(`https://task-api-tau.vercel.app/user'all`);
+    const response = await fetch(`https://task-api-tau.vercel.app/user/all`);
     if (!response.ok) {
       throw new Error(`Server responded with status: ${response.status}`);
     }
