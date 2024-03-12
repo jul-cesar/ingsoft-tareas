@@ -35,6 +35,7 @@ import { SelectEstado } from "./SelectEstadoTarea";
 export function DialogEditarTarea({ tareaInfo }) {
   const [open, setOpen] = useState(false);
   const { currentUser } = useContext(Auth);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -147,38 +148,46 @@ export function DialogEditarTarea({ tareaInfo }) {
                   )}
                 />
               </div>
-
-              <FormField
-                control={form.control}
-                name="prioridad"
-                render={({ field: { value, onChange } }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Prioridad
-                      <FormControl>
-                        <SelectDemo valuef={value} onChangeFn={onChange} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormLabel>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="estado"
-                render={({ field: { value, onChange } }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Estado
-                      <FormControl>
-                        <SelectEstado valuef={value} onChangeFn={onChange} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormLabel>
-                  </FormItem>
-                )}
-              />
-
+              <div className="">
+                <FormField
+                  control={form.control}
+                  name="prioridad"
+                  render={({ field: { value, onChange } }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Prioridad
+                        <FormControl>
+                          <SelectDemo
+                            valuef={value}
+                            onChangeFn={onChange}
+                            onOpenChange={(isOpen) => setDropdownOpen(isOpen)}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormLabel>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="estado"
+                  render={({ field: { value, onChange } }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Estado
+                        <FormControl>
+                          <SelectEstado
+                            valuef={value}
+                            onChangeFn={onChange}
+                            onOpenChange={(isOpen) => setDropdownOpen(isOpen)}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormLabel>
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 name="fechaVencimiento"
                 control={form.control}
@@ -201,8 +210,12 @@ export function DialogEditarTarea({ tareaInfo }) {
           </form>
         </Form>
         <DialogFooter>
-          <Button type="submit" onClick={form.handleSubmit(OnSubmit)}>
-            Crear
+          <Button
+            type="submit"
+            onClick={form.handleSubmit(OnSubmit)}
+            disabled={dropdownOpen}
+          >
+            Editar
           </Button>
         </DialogFooter>
       </DialogContent>

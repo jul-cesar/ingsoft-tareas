@@ -44,7 +44,7 @@ export function DropdownMenuDemo({ tareaInfo }) {
           </DropdownMenuItem>
           <DropdownMenuItem onClick={mutate}>
             <Trash className="mr-2 h-4 w-4" />
-            <span >Eliminar</span>
+            <span>Eliminar</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

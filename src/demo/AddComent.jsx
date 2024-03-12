@@ -39,50 +39,27 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getTaskComentarios } from "@/api/getTaskComentarios";
 import { Auth } from "@/context/authContext";
 import { createComentario } from "@/api/createComentario";
+import { Label } from "@radix-ui/react-label";
 
 export function DrawerDialogDemo({ namet, tareaInfo }) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  if (isDesktop) {
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button variant="outline">+ Comentar</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Comentarios</DialogTitle>
-            <DialogDescription>
-              Agrega notas o comentarios sobre el progreso de esta tarea
-            </DialogDescription>
-          </DialogHeader>
-          <ProfileForm namet={namet} tareaInfo={tareaInfo} />
-        </DialogContent>
-      </Dialog>
-    );
-  }
-
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
         <Button variant="outline">+ Comentar</Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className="text-left">
-          <DrawerTitle>Comentarios</DrawerTitle>
-          <DrawerDescription>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px] h-screen overflow-auto">
+        <DialogHeader>
+          <DialogTitle>Comentarios</DialogTitle>
+          <DialogDescription>
             Agrega notas o comentarios sobre el progreso de esta tarea
-          </DrawerDescription>
-        </DrawerHeader>
-        <ProfileForm className="px-4" namet={namet} tareaInfo={tareaInfo} />
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancelar</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+          </DialogDescription>
+        </DialogHeader>
+        <ProfileForm namet={namet} tareaInfo={tareaInfo} />
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -123,10 +100,12 @@ function ProfileForm({ className, namet, tareaInfo }) {
 
   const OnSubmit = (data) => {
     mutate({ tareaId: tareaInfo.id, authorId: id, contenido: data.contenido });
+    console.log(listaComentarios, "DASDASDASDAS"); // Agregar para depurar
+
     console.log(data);
   };
   return (
-    <>
+    <div>
       <Form {...form}>
         <form
           className={cn("grid items-start gap-4", className)}
@@ -151,32 +130,35 @@ function ProfileForm({ className, namet, tareaInfo }) {
           <Button type="submit">Guardar</Button>
         </form>
       </Form>
-      {Array.isArray(listaComentarios) &&
-        listaComentarios.map((comentario) => (
-          <div class="flex items-start gap-2.5">
-            <img
-              class="w-8 h-8 rounded-full"
-              src="/docs/images/people/profile-picture-3.jpg"
-              alt="Jese image"
-            />
-            <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-              <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                <span class="text-sm font-semibold text-gray-900 dark:text-white">
-                  {}
-                </span>
+      <div className="flex flex-col flex-wrap gap-2 m-4">
+        <Label className="self-center">Comentarios</Label>
+        {Array.isArray(listaComentarios) &&
+          listaComentarios.map((comentario) => (
+            <div class="flex">
+              <img
+                class="w-8 h-8 rounded-full m-2"
+                src={currentUser.photoURL}
+                alt="Jese image"
+              />
+              <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                  <span class="text-sm font-semibold text-gray-900 dark:text-white">
+                    {}
+                  </span>
+                  <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                    
+                  </span>
+                </div>
+                <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+                  {comentario.contenido}
+                </p>
                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                  11:46
+               
                 </span>
               </div>
-              <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-                {comentario.contenido}
-              </p>
-              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                Delivered
-              </span>
             </div>
-          </div>
-        ))}
-    </>
+          ))}
+      </div>
+    </div>
   );
 }

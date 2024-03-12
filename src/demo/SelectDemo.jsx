@@ -10,9 +10,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectDemo({ valuef, onChangeFn }) {
+export function SelectDemo({ valuef, onChangeFn, onOpenChange}) {
   return (
-    <Select onValueChange={onChangeFn}>
+    <Select onValueChange={onChangeFn} onOpenChange={onOpenChange} >
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Elige una prioridad" value={valuef} />
       </SelectTrigger>
