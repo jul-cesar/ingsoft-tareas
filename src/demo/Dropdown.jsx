@@ -12,20 +12,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteTarea } from "@/api/deleteTarea";
+
+import { DeleteTareaDialog } from "./DeleteTareaDialog";
 
 export function DropdownMenuDemo({ tareaInfo }) {
-  const queryClient = useQueryClient();
-  const { mutate, isPending, isError, isSuccess } = useMutation({
-    mutationFn: async (newTarea) => {
-      console.log(newTarea, "new");
-      await deleteTarea(tareaInfo.id);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["listaTasks"] });
-    },
-  });
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -42,10 +32,10 @@ export function DropdownMenuDemo({ tareaInfo }) {
               <span>Ver comentarios</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={mutate}>
+          <div className="flex items-center m-2 cursor-pointer h-full">
             <Trash className="mr-2 h-4 w-4" />
-            <span>Eliminar</span>
-          </DropdownMenuItem>
+            <DeleteTareaDialog tareaInfo={tareaInfo} className="cursor-pointer" />
+          </div>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

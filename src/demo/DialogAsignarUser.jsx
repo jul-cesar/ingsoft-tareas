@@ -12,7 +12,6 @@ import {
 import { SelectForm } from "./SelectAsignarUser";
 import { useState } from "react";
 
-
 export function DialogAsignarUser({ name, userAsign }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 

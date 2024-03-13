@@ -33,6 +33,8 @@ import {
 } from "@tanstack/react-query";
 import { createTarea } from "@/api/createTarea";
 import { Auth } from "@/context/authContext";
+import { toast } from "sonner";
+import MiniLoading from "@/components/MiniLoading";
 
 export function DialogTareaForm({ listaTareas, setListaTareas }) {
   const [open, setOpen] = useState(false);
@@ -80,7 +82,8 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
       await createTarea(newTarea);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["listaTasks"] });
+      queryClient.invalidateQueries({ queryKey: ["listaTasks"] }),
+        toast.success("Tarea creada con exito!");
     },
   });
   const OnSubmit = (data) => {
@@ -92,7 +95,10 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
       fechaVencimiento: data.fechaVencimiento,
       ownerId: currentUser.uid,
     });
-    setOpen(!open);
+    if (!isPending) {
+      setOpen(!open);
+    }
+
     console.log(data);
   };
 
@@ -191,9 +197,13 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
           </form>
         </Form>
         <DialogFooter>
-          <Button type="submit" onClick={form.handleSubmit(OnSubmit)}>
-            Crear
-          </Button>
+          {!isPending ? (
+            <Button type="submit" onClick={form.handleSubmit(OnSubmit)}>
+              Crear
+            </Button>
+          ) : (
+            <MiniLoading />
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

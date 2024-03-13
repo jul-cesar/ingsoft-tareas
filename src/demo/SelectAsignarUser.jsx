@@ -65,7 +65,7 @@ export function SelectForm({ setIsOpenDialog, userAsign, currentTarea }) {
                 <SelectContent>
                   {Array.isArray(listaUsuarios) &&
                     listaUsuarios.map((user) => (
-                      <SelectItem value="usuario1">{user.nombre}</SelectItem>
+                      <SelectItem value={user.nombre}>{user.nombre}</SelectItem>
                     ))}
                 </SelectContent>
               </Select>

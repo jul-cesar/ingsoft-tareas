@@ -31,6 +31,8 @@ import { createTarea } from "@/api/createTarea";
 import { Auth } from "@/context/authContext";
 import { updateTarea } from "@/api/updateTarea";
 import { SelectEstado } from "./SelectEstadoTarea";
+import MiniLoading from "@/components/MiniLoading";
+import { toast } from "sonner";
 
 export function DialogEditarTarea({ tareaInfo }) {
   const [open, setOpen] = useState(false);
@@ -79,7 +81,8 @@ export function DialogEditarTarea({ tareaInfo }) {
       await updateTarea(tareaInfo.id, newTarea);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["listaTasks"] });
+      queryClient.invalidateQueries({ queryKey: ["listaTasks"] }),
+        toast.success(`Tarea editada`);
     },
   });
   const OnSubmit = (data) => {
@@ -91,7 +94,10 @@ export function DialogEditarTarea({ tareaInfo }) {
       fechaVencimiento: data.fechaVencimiento,
       ownerId: currentUser.uid,
     });
-    setOpen(!open);
+    if (!isPending) {
+      setOpen(!open);
+    }
+
     console.log(data);
   };
 
@@ -210,13 +216,13 @@ export function DialogEditarTarea({ tareaInfo }) {
           </form>
         </Form>
         <DialogFooter>
-          <Button
-            type="submit"
-            onClick={form.handleSubmit(OnSubmit)}
-            disabled={dropdownOpen}
-          >
-            Editar
-          </Button>
+          {!isPending ? (
+            <Button type="submit" onClick={form.handleSubmit(OnSubmit)}>
+              Editar
+            </Button>
+          ) : (
+            <MiniLoading />
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>
