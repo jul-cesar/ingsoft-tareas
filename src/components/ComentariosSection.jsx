@@ -1,22 +1,20 @@
 import { AvatarDemo } from '@/demo/Avatar'
+import { DropdownComentarios } from '@/demo/ComentarioDropdown'
 import { formatCustomDate } from '@/utils/fechaFormat'
 import { Label } from '@radix-ui/react-label'
 import { Ellipsis, EllipsisVertical } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 
 const ComentariosSection = ({ listaComentarios, isLoading, currentUser }) => {
+    const [open, setOpen] = useState(false)
     return (
         <div className='m-3'>
-            <h1 className="self-center m-3">Comentarios</h1>
+            {listaComentarios?.length > 0 && <h1 className="self-center m-3">Comentarios</h1>}
             {!isLoading && Array.isArray(listaComentarios) ? (
                 listaComentarios.map((comentario) => (
-
                     <div class="flex items-start gap-2.5">
 
-
                         <AvatarDemo src={currentUser?.photoURL} />
-
-
                         <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 m-2 border-gray-200  rounded-e-xl rounded-es-xl bg-gray-900">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                 <span class="text-sm font-semibold text-gray-900 dark:text-white">{comentario.author.nombre}</span>
@@ -25,28 +23,8 @@ const ComentariosSection = ({ listaComentarios, isLoading, currentUser }) => {
                             <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{comentario.contenido}</p>
                             <span class="text-sm font-normal text-gray-500 dark:text-gray-400"></span>
                         </div>
-                        <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" data-dropdown-placement="bottom-start" class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600" type="button">
-                            <EllipsisVertical />
-                        </button>
-                        <div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reply</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Forward</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Copy</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <DropdownComentarios comentarioData={comentario} />
+
                     </div>
 
                 ))

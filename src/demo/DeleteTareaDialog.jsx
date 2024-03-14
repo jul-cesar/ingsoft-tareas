@@ -39,7 +39,7 @@ export function DeleteTareaDialog({ tareaInfo }) {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>
-            Estas seguro que deseas eliminar"{tareaInfo.titulo}"
+            Estas seguro que deseas eliminar "{tareaInfo.titulo}"
           </DialogTitle>
           <DialogDescription>
             Por favor, tenga en cuenta que los comentarios realizados en esta
@@ -48,7 +48,7 @@ export function DeleteTareaDialog({ tareaInfo }) {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4"></div>
-        <DialogFooter>
+        <DialogFooter className={"gap-2"}>
           {!isPending ? (
             <Button type="submit" onClick={mutate}>
               Si

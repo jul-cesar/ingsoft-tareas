@@ -54,7 +54,7 @@ export function AddComent({ namet, tareaInfo }) {
       <DialogTrigger asChild>
         <Button >+ Nota</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] h-5/6 overflow-auto">
+      <DialogContent className="sm:max-w-[425px] max-w-96 min-h-12 max-h-[600px] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Comentarios</DialogTitle>
           <DialogDescription>
@@ -108,7 +108,7 @@ function ProfileForm({ className, namet, tareaInfo }) {
     form.reset({ contenido: "" });
   };
   return (
-    <div>
+    <div >
       <Form {...form}>
         <form
           className={cn("grid items-start gap-4", className)}

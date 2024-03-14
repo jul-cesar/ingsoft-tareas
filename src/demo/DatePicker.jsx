@@ -32,6 +32,8 @@ export const DatePickerDemo = React.forwardRef(({ valuef, onChangef }, ref) => {
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
+          
+          showOutsideDays={false}
           mode="single"
           selected={valuef ? new Date(valuef) : undefined}
           onSelect={(date) => onChangef(formatISO(date, "yyyy-MMMM-dd"))}

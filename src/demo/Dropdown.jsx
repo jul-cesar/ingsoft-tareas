@@ -25,13 +25,13 @@ export function DropdownMenuDemo({ tareaInfo }) {
         <DropdownMenuLabel>Opciones</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          {/* <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
             <Link to={"login"}>
               {" "}
               <span>Ver comentarios</span>
             </Link>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <div className="flex items-center m-2 cursor-pointer h-full">
             <Trash className="mr-2 h-4 w-4" />
             <DeleteTareaDialog tareaInfo={tareaInfo} className="cursor-pointer" />
