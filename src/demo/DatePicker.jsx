@@ -32,7 +32,9 @@ export const DatePickerDemo = React.forwardRef(({ valuef, onChangef }, ref) => {
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
-          
+          captionLayout="dropdown-buttons" //Also: dropdown | buttons
+          fromYear={2024}
+          toYear={2024}
           showOutsideDays={false}
           mode="single"
           selected={valuef ? new Date(valuef) : undefined}
