@@ -27,6 +27,7 @@ export function DeleteTareaDialog({ tareaInfo }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["listaTasks"] }),
+        setIsDialogOpen(false)
         toast.success(`Tarea eliminada`);
     },
   });
@@ -48,7 +49,7 @@ export function DeleteTareaDialog({ tareaInfo }) {
         </DialogHeader>
         <div className="grid gap-4 py-4"></div>
         <DialogFooter>
-          {isPending ? (
+          {!isPending ? (
             <Button type="submit" onClick={mutate}>
               Si
             </Button>

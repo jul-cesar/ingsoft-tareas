@@ -22,7 +22,7 @@ export function DialogAsignarUser({ name, userAsign }) {
       onOpenChange={(open) => setIsDialogOpen(open)}
     >
       <DialogTrigger asChild>
-        <Button variant="outline">Asignar </Button>
+        <Button>Asignar </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-w-[300px]">
         <DialogHeader>

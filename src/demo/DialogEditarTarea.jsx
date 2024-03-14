@@ -104,7 +104,7 @@ export function DialogEditarTarea({ tareaInfo }) {
   return (
     <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
       <DialogTrigger asChild>
-        <Button variant="outline">Editar tarea</Button>
+        <Button >Editar tarea</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

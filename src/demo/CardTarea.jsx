@@ -13,10 +13,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BadgeEstado } from "@/demo/BedgeEstado";
 import { DialogAsignarUser } from "./DialogAsignarUser";
-import { DrawerDialogDemo } from "./AddComent";
+import { AddComent } from "./AddComent";
 import { format, formatISO } from "date-fns";
 import { DialogEditarTarea } from "./DialogEditarTarea";
 import { DropdownMenuDemo } from "./Dropdown";
+import { formatCustomDate } from "@/utils/fechaFormat";
 
 export function CardTarea({
   titulo,
@@ -34,17 +35,7 @@ export function CardTarea({
     format(now, "d 'de' MMM' a las' h:mm")
   );
 
-  function formatCustomDate(datex) {
-    const date = new Date(datex);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses van de 0 a 11, así que se suma 1
-    const day = String(date.getDate()).padStart(2, '0');
-    const hour = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
 
- 
-    return `${year} ${month} ${day} / ${hour}:${minutes}`;
-}
 
   const userAsign = (data) => {
     setUserAsignado(data);
@@ -91,7 +82,7 @@ export function CardTarea({
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <DrawerDialogDemo tareaInfo={tareaInfo} namet={titulo} />
+        <AddComent tareaInfo={tareaInfo} namet={titulo} />
         <DialogAsignarUser userAsign={userAsign} name={titulo} />
 
         <DialogEditarTarea tareaInfo={tareaInfo} />

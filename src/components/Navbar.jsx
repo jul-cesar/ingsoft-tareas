@@ -1,4 +1,5 @@
 import { Auth } from "@/context/authContext";
+import { AvatarDemo } from "@/demo/Avatar";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -62,19 +63,14 @@ const Navbar = () => {
                     data-dropdown-toggle="dropdown-user"
                   >
                     <span className="sr-only">Open user menu</span>
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src={currentUser?.photoURL}
-                      alt="user photo"
-                    />
+                    <AvatarDemo  src={currentUser?.photoURL}/>
                   </button>
                 }
               </div>
 
               <div
-                className={`absolute right-0 top-16 m-2 z-50 ${
-                  !openMenuProfile ? "hidden" : "block"
-                } text-base list-none bg-white divide-y divide-gray-100 rounded shadow`}
+                className={`absolute right-0 top-16 m-2 z-50 ${!openMenuProfile ? "hidden" : "block"
+                  } text-base list-none bg-white divide-y divide-gray-100 rounded shadow`}
                 id="dropdown-user"
               >
                 <div className="px-4 py-3" role="none">
