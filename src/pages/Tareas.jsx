@@ -26,6 +26,7 @@ const Tareas = () => {
       <Navbar />
       <TareasManagement />
       <div className="text-center m-4">
+        <h1 className="font-bold m-4">Work Flow</h1>
         <h2 className="font-bold">
           Hola! {currentUser?.displayName || currentUser?.email?.split("@")[0]}
         </h2>
