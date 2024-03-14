@@ -14,7 +14,7 @@ const ListaTareas = ({ listaTareas }) => {
             createdAt={tarea.createdAt}
             key={i}
             titulo={tarea.titulo}
-            descripcion={tarea.description}
+            descripcion={tarea.descripcion}
             prioridad={tarea.prioridad}
             fecha={tarea.fechaVencimiento}
             estado={tarea.estado}
