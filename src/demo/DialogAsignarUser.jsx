@@ -26,13 +26,13 @@ export function DialogAsignarUser({ name, userAsign }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-w-[300px]">
         <DialogHeader>
-          <DialogTitle>Asigna un usuario a la tarea "{name}"</DialogTitle>
+          <DialogTitle>Asigna un usuario a la tarea "{name.nombre}"</DialogTitle>
           <DialogDescription>Al asignar una tarea xdxdxd</DialogDescription>
         </DialogHeader>
         <SelectForm
           currentTarea={name}
           setIsOpenDialog={setIsDialogOpen}
-          userAsign={userAsign}
+          
         />
         <DialogFooter></DialogFooter>
       </DialogContent>

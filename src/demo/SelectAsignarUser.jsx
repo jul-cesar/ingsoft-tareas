@@ -23,7 +23,8 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { getAllUsers } from "@/api/getAllUsers";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { updateTarea } from "@/api/updateTarea";
 
 const FormSchema = z.object({
   userAsignado: z.string({
@@ -31,19 +32,33 @@ const FormSchema = z.object({
   }),
 });
 
-export function SelectForm({ setIsOpenDialog, userAsign, currentTarea }) {
+export function SelectForm({ setIsOpenDialog, currentTarea }) {
   const { data: listaUsuarios } = useQuery({
     queryKey: ["listaUsuarios"],
     queryFn: async () => await getAllUsers(),
   });
 
+
+
   const form = useForm({
     resolver: zodResolver(FormSchema),
   });
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending, isError, isSuccess } = useMutation({
+    mutationFn: async (newTarea) => {
+      await updateTarea(currentTarea.id, newTarea);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["listaTasks"] })
+      queryClient.invalidateQueries({ queryKey: ["listaAsign"] });
+
+      toast.success(`Asignaste un usuario a la tarea ${currentTarea.titulo}`);
+    }
+  });
 
   function onSubmit(data) {
-    toast.success(`Asignaste ${data.userAsignado} a la tarea ${currentTarea}`);
-    userAsign(data.userAsignado);
+    mutate({ asignadoId: data.userAsignado })
     setIsOpenDialog(false);
   }
 
@@ -65,7 +80,7 @@ export function SelectForm({ setIsOpenDialog, userAsign, currentTarea }) {
                 <SelectContent>
                   {Array.isArray(listaUsuarios) &&
                     listaUsuarios.map((user) => (
-                      <SelectItem value={user.nombre}>{user.nombre}</SelectItem>
+                      <SelectItem key={user.id} value={user.id}>{user.nombre}</SelectItem>
                     ))}
                 </SelectContent>
               </Select>

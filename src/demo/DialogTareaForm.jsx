@@ -99,7 +99,7 @@ export function DialogTareaForm({ listaTareas, setListaTareas }) {
       setOpen(!open);
     }
 
-    console.log(data);
+  
   };
 
   return (

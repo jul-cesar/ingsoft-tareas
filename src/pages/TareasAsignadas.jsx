@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
 
-import CardTarea from "@/demo/CardTarea";
+import CardTarea from '@/demo/CardTarea';
 
-const ListaTareas = ({ listaTareas, isLoading }) => {
+import React, { useContext } from 'react'
+
+const TareasAsignadas = ({ listaTareasAsignadas, isLoading }) => {
+
+
   return (
     <div className="flex items-center  justify-center m-4 gap-4  flex-wrap">
-      {(!isLoading && Array.isArray(listaTareas)) ?
-        listaTareas.map((tarea, i) => (
+      {(!isLoading && Array.isArray(listaTareasAsignadas)) ?
+        listaTareasAsignadas.map((tarea, i) => (
           <CardTarea
             tareaInfo={tarea}
             fechaCreacion={tarea.fechaCreacion}
@@ -19,7 +22,6 @@ const ListaTareas = ({ listaTareas, isLoading }) => {
             fecha={tarea.fechaVencimiento}
             estado={tarea.estado}
             owner={tarea.owner.nombre}
-            asignado={tarea.asignado?.nombre}
           />
         ))
         :
@@ -43,7 +45,7 @@ const ListaTareas = ({ listaTareas, isLoading }) => {
         </div>
       }
     </div>
-  );
-};
+  )
+}
 
-export default ListaTareas;
+export default TareasAsignadas

@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -14,12 +13,11 @@ import { Label } from "@/components/ui/label";
 import { BadgeEstado } from "@/demo/BedgeEstado";
 import { DialogAsignarUser } from "./DialogAsignarUser";
 import { AddComent } from "./AddComent";
-import { format, formatISO } from "date-fns";
 import { DialogEditarTarea } from "./DialogEditarTarea";
 import { DropdownMenuDemo } from "./Dropdown";
 import { formatCustomDate } from "@/utils/fechaFormat";
 
-export function CardTarea({
+function CardTarea({
   titulo,
   descripcion,
   fecha,
@@ -27,23 +25,13 @@ export function CardTarea({
   prioridad,
   tareaInfo,
   createdAt,
+  owner,
+  tarea,
+  asignado,
 }) {
-  const [userAsignado, setUserAsignado] = React.useState();
-  const now = new Date();
-
-  const [fechaCreacion, setFechaCreacion] = React.useState(
-    format(now, "d 'de' MMM' a las' h:mm")
-  );
-
-
-
-  const userAsign = (data) => {
-    setUserAsignado(data);
-  };
-
-  const [open, setOpen] = React.useState(false);
+  // Lógica y JSX del componente
   return (
-    <Card className="max-w-[350px] ">
+    <Card className="max-w-[350px]">
       <CardHeader>
         <CardTitle>
           <div className="flex justify-between">
@@ -51,19 +39,19 @@ export function CardTarea({
             <DropdownMenuDemo tareaInfo={tareaInfo} />
           </div>
         </CardTitle>
+        <CardDescription>Creada por: {owner}</CardDescription>
         <CardDescription>Creada: {formatCustomDate(createdAt)}</CardDescription>
-        {userAsignado && (
-          <CardDescription>Asignada a: {userAsignado} </CardDescription>
-        )}
+
+        {asignado && <CardDescription>Asignada a: {asignado}</CardDescription>}
         <CardDescription>{descripcion}</CardDescription>
       </CardHeader>
       <div className="flex items-center justify-between gap-2 m-4">
         <div className="p-2">
-          <Label>Estado: </Label>
+          <Label>Estado:</Label>
           <BadgeEstado>{estado?.toUpperCase()}</BadgeEstado>
         </div>
         <div className="p-2">
-          <Label>Prioridad: </Label>
+          <Label>Prioridad:</Label>
           <BadgeEstado>{prioridad?.toUpperCase()}</BadgeEstado>
         </div>
       </div>
@@ -77,16 +65,17 @@ export function CardTarea({
                 {fecha?.split("T")[0].toUpperCase()}
               </BadgeEstado>
             </div>
-            <div className="flex flex-col space-y-1.5"></div>
           </div>
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
         <AddComent tareaInfo={tareaInfo} namet={titulo} />
-        <DialogAsignarUser userAsign={userAsign} name={titulo} />
-
+        <DialogAsignarUser name={tarea} />
         <DialogEditarTarea tareaInfo={tareaInfo} />
       </CardFooter>
     </Card>
   );
 }
+
+// Envuelve el componente con React.memo y exporta
+export default React.memo(CardTarea);

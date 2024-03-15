@@ -12,7 +12,7 @@ const ComentariosSection = ({ listaComentarios, isLoading, currentUser }) => {
             {listaComentarios?.length > 0 && <h1 className="self-center m-3">Comentarios</h1>}
             {!isLoading && Array.isArray(listaComentarios) ? (
                 listaComentarios.map((comentario) => (
-                    <div class="flex items-start gap-2.5">
+                    <div class="flex items-start gap-2.5" key={comentario.id}>
 
                         <AvatarDemo src={currentUser?.photoURL} />
                         <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 m-2 border-gray-200  rounded-e-xl rounded-es-xl bg-gray-900">
