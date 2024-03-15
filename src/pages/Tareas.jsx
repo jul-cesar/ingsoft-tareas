@@ -33,13 +33,9 @@ const Tareas = () => {
 
   return (
     <div className="h-screen w-full">
-
       <Navbar />
-
-      <TareasManagement />
-      <Tabs setShowTareas={setShowTareas} />
+      <Tabs setShowTareas={setShowTareas} showTareas={showTareas} />
       <div className="text-center m-4">
-
         <h2 className="font-bold">
           Hola! {currentUser?.displayName || currentUser?.email?.split("@")[0]}
         </h2>

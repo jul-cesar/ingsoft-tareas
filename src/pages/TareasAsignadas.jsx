@@ -1,7 +1,8 @@
 
-import CardTarea from '@/demo/CardTarea';
+import CardAsignada from '@/demo/CardAsignada';
 
-import React, { useContext } from 'react'
+
+import React from 'react'
 
 const TareasAsignadas = ({ listaTareasAsignadas, isLoading }) => {
 
@@ -10,12 +11,11 @@ const TareasAsignadas = ({ listaTareasAsignadas, isLoading }) => {
     <div className="flex items-center  justify-center m-4 gap-4  flex-wrap">
       {(!isLoading && Array.isArray(listaTareasAsignadas)) ?
         listaTareasAsignadas.map((tarea, i) => (
-          <CardTarea
+          <CardAsignada
+            key={tarea.id}
             tareaInfo={tarea}
             fechaCreacion={tarea.fechaCreacion}
-            tarea={tarea}
             createdAt={tarea.createdAt}
-            key={tarea.id}
             titulo={tarea.titulo}
             descripcion={tarea.descripcion}
             prioridad={tarea.prioridad}

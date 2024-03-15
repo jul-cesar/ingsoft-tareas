@@ -11,8 +11,9 @@ import {
 
 import { SelectForm } from "./SelectAsignarUser";
 import { useState } from "react";
+import { UserPlus } from "lucide-react";
 
-export function DialogAsignarUser({ name, userAsign }) {
+export function DialogAsignarUser({ name }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
@@ -22,7 +23,7 @@ export function DialogAsignarUser({ name, userAsign }) {
       onOpenChange={(open) => setIsDialogOpen(open)}
     >
       <DialogTrigger asChild>
-        <Button>Asignar </Button>
+        <Button> <UserPlus /> </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-w-[300px]">
         <DialogHeader>
@@ -32,7 +33,7 @@ export function DialogAsignarUser({ name, userAsign }) {
         <SelectForm
           currentTarea={name}
           setIsOpenDialog={setIsDialogOpen}
-          
+
         />
         <DialogFooter></DialogFooter>
       </DialogContent>

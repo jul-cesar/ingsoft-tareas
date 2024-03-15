@@ -5,7 +5,7 @@ import { DialogTareaForm } from "@/demo/DialogTareaForm";
 
 const TareasManagement = ({ listaTareas, setListaTareas }) => {
   return (
-    <div className="w-full flex justify-center mt-20">
+    <div className="w-full flex justify-center">
       <Toaster />
 
       <DialogTareaForm

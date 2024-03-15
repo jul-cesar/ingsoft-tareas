@@ -44,6 +44,7 @@ import { toast } from "sonner";
 import MiniLoading from "@/components/MiniLoading";
 import { formatCustomDate } from "@/utils/fechaFormat";
 import ComentariosSection from "@/components/ComentariosSection";
+import { MessageSquarePlus, Text } from "lucide-react";
 
 export function AddComent({ namet, tareaInfo }) {
   const [open, setOpen] = React.useState(false);
@@ -52,7 +53,7 @@ export function AddComent({ namet, tareaInfo }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button >+ Nota</Button>
+        <Button > <MessageSquarePlus/> </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-w-96 min-h-12 max-h-[600px] overflow-y-auto">
         <DialogHeader>

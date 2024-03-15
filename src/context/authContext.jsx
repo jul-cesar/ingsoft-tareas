@@ -8,10 +8,11 @@ import {
   signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import { auth } from "@/auth-frb/firebase";
+
 import { useNavigate } from "react-router-dom";
 import { useCreateUser } from "@/api/useCreateUser";
 import { getUserWithEmail } from "@/api/getUserWithEmail";
+import { auth } from "@/auth-frb/firebase";
 
 export const Auth = createContext();
 

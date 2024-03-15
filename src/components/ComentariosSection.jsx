@@ -1,15 +1,18 @@
 import { AvatarDemo } from '@/demo/Avatar'
 import { DropdownComentarios } from '@/demo/ComentarioDropdown'
-import { formatCustomDate } from '@/utils/fechaFormat'
-import { Label } from '@radix-ui/react-label'
-import { Ellipsis, EllipsisVertical } from 'lucide-react'
+
+import { formatDistanceToNow } from 'date-fns'
+
 import React, { useState } from 'react'
+import { es } from 'date-fns/locale'; // Importa el locale español si prefieres que la diferencia esté en español
+import { formatCustomDate } from '@/utils/fechaFormat';
+
 
 const ComentariosSection = ({ listaComentarios, isLoading, currentUser }) => {
     const [open, setOpen] = useState(false)
     return (
         <div className='m-3'>
-            {listaComentarios?.length > 0 && <h1 className="self-center m-3">Comentarios</h1>}
+
             {!isLoading && Array.isArray(listaComentarios) ? (
                 listaComentarios.map((comentario) => (
                     <div class="flex items-start gap-2.5" key={comentario.id}>
@@ -18,7 +21,7 @@ const ComentariosSection = ({ listaComentarios, isLoading, currentUser }) => {
                         <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 m-2 border-gray-200  rounded-e-xl rounded-es-xl bg-gray-900">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                 <span class="text-sm font-semibold text-gray-900 dark:text-white">{comentario.author.nombre}</span>
-                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{formatCustomDate(comentario.fecha)}</span>
+                                <span class="text-xs font-normal text-gray-500 dark:text-gray-400"> {formatCustomDate(comentario.fecha)}</span>
                             </div>
                             <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{comentario.contenido}</p>
                             <span class="text-sm font-normal text-gray-500 dark:text-gray-400"></span>

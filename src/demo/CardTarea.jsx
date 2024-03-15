@@ -26,7 +26,6 @@ function CardTarea({
   tareaInfo,
   createdAt,
   owner,
-  tarea,
   asignado,
 }) {
   // Lógica y JSX del componente
@@ -40,18 +39,18 @@ function CardTarea({
           </div>
         </CardTitle>
         <CardDescription>Creada por: {owner}</CardDescription>
-        <CardDescription>Creada: {formatCustomDate(createdAt)}</CardDescription>
+        <CardDescription>Creada: hace {formatCustomDate(createdAt)}</CardDescription>
 
         {asignado && <CardDescription>Asignada a: {asignado}</CardDescription>}
         <CardDescription>{descripcion}</CardDescription>
       </CardHeader>
       <div className="flex items-center justify-between gap-2 m-4">
         <div className="p-2">
-          <Label>Estado:</Label>
+          <Label>Estado: </Label>
           <BadgeEstado>{estado?.toUpperCase()}</BadgeEstado>
         </div>
         <div className="p-2">
-          <Label>Prioridad:</Label>
+          <Label>Prioridad: </Label>
           <BadgeEstado>{prioridad?.toUpperCase()}</BadgeEstado>
         </div>
       </div>
@@ -60,17 +59,17 @@ function CardTarea({
         <form>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col items-center space-y-2">
-              <Label htmlFor="name">Fecha de vencimiento:</Label>
+              <Label htmlFor="name">Fecha de vencimiento: </Label>
               <BadgeEstado variant="secondary">
-                {fecha?.split("T")[0].toUpperCase()}
+                {formatCustomDate(fecha)}
               </BadgeEstado>
             </div>
           </div>
         </form>
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="flex justify-evenly">
         <AddComent tareaInfo={tareaInfo} namet={titulo} />
-        <DialogAsignarUser name={tarea} />
+        <DialogAsignarUser name={tareaInfo} />
         <DialogEditarTarea tareaInfo={tareaInfo} />
       </CardFooter>
     </Card>

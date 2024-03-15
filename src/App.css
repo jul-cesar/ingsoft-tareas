@@ -2,6 +2,12 @@ body {
   background-color: #f9fafb;
   scroll-behavior: smooth;
 }
+.auth{
+  background-image: url('assets/bgsv.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; /* Center the background image */
+}
 
 * {
   min-width: 0;

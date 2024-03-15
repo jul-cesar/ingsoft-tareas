@@ -1,11 +1,20 @@
-export function formatCustomDate(datex) {
-    const date = new Date(datex);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses van de 0 a 11, así que se suma 1
-    const day = String(date.getDate()).padStart(2, '0');
-    const hour = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+import { formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale";
 
- 
-    return `${year} ${month} ${day} - ${hour}:${minutes}`;
+export function formatCustomDate(date) {
+  let result = formatDistanceToNow(new Date(date), {
+    locale: es,
+  });
+
+  result = result
+
+    .replace(/minutos?/, "m")
+    .replace(/horas?/, "h")
+    .replace(/días?/, "d")
+    .replace(/meses?/, "mes")
+    .replace(/años?/, "a");
+
+  result = result.replace(/menos de un m/, "ahora");
+
+  return result;
 }

@@ -45,21 +45,21 @@ export function SelectForm({ setIsOpenDialog, currentTarea }) {
   });
   const queryClient = useQueryClient();
 
-  const { mutate, isPending, isError, isSuccess } = useMutation({
+  const { mutate, isPending, isError, isSuccess, } = useMutation({
     mutationFn: async (newTarea) => {
       await updateTarea(currentTarea.id, newTarea);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["listaTasks"] })
-      queryClient.invalidateQueries({ queryKey: ["listaAsign"] });
-
-      toast.success(`Asignaste un usuario a la tarea ${currentTarea.titulo}`);
+      queryClient.invalidateQueries({ queryKey: ["listaTasks"] }),
+      queryClient.invalidateQueries({ queryKey: ["listaAsign"] }),
+        toast.success(`Asignaste un usuario a la tarea ${currentTarea.titulo}`);
+      setIsOpenDialog(false);
     }
   });
 
   function onSubmit(data) {
     mutate({ asignadoId: data.userAsignado })
-    setIsOpenDialog(false);
+
   }
 
   return (

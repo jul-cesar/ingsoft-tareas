@@ -33,6 +33,7 @@ import { updateTarea } from "@/api/updateTarea";
 import { SelectEstado } from "./SelectEstadoTarea";
 import MiniLoading from "@/components/MiniLoading";
 import { toast } from "sonner";
+import { Edit, Edit2, Edit3, LucideEdit } from "lucide-react";
 
 export function DialogEditarTarea({ tareaInfo }) {
   const [open, setOpen] = useState(false);
@@ -104,7 +105,7 @@ export function DialogEditarTarea({ tareaInfo }) {
   return (
     <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
       <DialogTrigger asChild>
-        <Button >Editar tarea</Button>
+        <Button > <LucideEdit/> </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
