@@ -37,7 +37,7 @@ const Tareas = () => {
       <Tabs setShowTareas={setShowTareas} showTareas={showTareas} />
       <div className="text-center m-4">
         <h2 className="font-bold">
-          Hola! {currentUser?.displayName || currentUser?.email?.split("@")[0]}
+          Bienvenido, {currentUser?.displayName || currentUser?.email?.split("@")[0]}.
         </h2>
       </div>
       {showTareas ? <ListaTareas listaTareas={listaTareas} isLoading={isLoading} /> : <TareasAsignadas isLoading={loadingAsign} listaTareasAsignadas={listaTareasAsignadas} />}

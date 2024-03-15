@@ -7,11 +7,7 @@ export const getUserWithEmail = async (email) => {
       throw new Error(`Server responded with status: ${response.status}`);
     }
     const data = await response.json();
-    if (data) {
-      return true;
-    } else {
-      return false;
-    }
+    return data;
   } catch (e) {
     console.error(e.message);
   }

@@ -27,7 +27,7 @@ export function DialogAsignarUser({ name }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-w-[300px]">
         <DialogHeader>
-          <DialogTitle>Asigna un usuario a la tarea "{name.nombre}"</DialogTitle>
+          <DialogTitle>Asigna un usuario a la tarea "{name.titulo}"</DialogTitle>
           <DialogDescription>Al asignar una tarea xdxdxd</DialogDescription>
         </DialogHeader>
         <SelectForm

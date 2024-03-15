@@ -17,7 +17,7 @@ const ComentariosSection = ({ listaComentarios, isLoading, currentUser }) => {
                 listaComentarios.map((comentario) => (
                     <div class="flex items-start gap-2.5" key={comentario.id}>
 
-                        <AvatarDemo src={currentUser?.photoURL} />
+                        <AvatarDemo src={comentario?.author?.photoURL} />
                         <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 m-2 border-gray-200  rounded-e-xl rounded-es-xl bg-gray-900">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                 <span class="text-sm font-semibold text-gray-900 dark:text-white">{comentario.author.nombre}</span>
