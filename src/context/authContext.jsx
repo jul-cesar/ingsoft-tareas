@@ -57,16 +57,16 @@ export const AuthFunction = ({ children }) => {
         setCurrentUser(null);
       }
       const userExist = await getUserWithEmail(currentUser?.email);
-      if (userExist.photoURL === null) {
-        await updateUser(userExist.id, { photoURL: currentUser.photoURL })
-      }
+
       if (!userExist && currentUser) {
         createUserFn({
           id: currentUser?.uid,
           nombre: currentUser?.displayName || currentUser?.email?.split("@")[0],
           email: currentUser?.email,
-          photoURl: currentUser?.photoURL
+          photoURL: currentUser?.photoURL
         });
+      } else if (userExist.photoURL === null) {
+        await updateUser(userExist.id, { photoURL: currentUser.photoURL })
       }
     });
     return () => {
