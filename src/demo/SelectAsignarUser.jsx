@@ -25,6 +25,8 @@ import { toast } from "sonner";
 import { getAllUsers } from "@/api/getAllUsers";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { updateTarea } from "@/api/updateTarea";
+import { useContext, useEffect, useState } from "react";
+import { Auth } from "@/context/authContext";
 
 const FormSchema = z.object({
   userAsignado: z.string({
@@ -39,6 +41,9 @@ export function SelectForm({ setIsOpenDialog, currentTarea }) {
   });
 
 
+  const currentUser = useContext(Auth)
+
+  const [listaFiltrada, setListaFiltrada] = useState([])
 
   const form = useForm({
     resolver: zodResolver(FormSchema),
@@ -51,7 +56,7 @@ export function SelectForm({ setIsOpenDialog, currentTarea }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["listaTasks"] }),
-      queryClient.invalidateQueries({ queryKey: ["listaAsign"] }),
+        queryClient.invalidateQueries({ queryKey: ["listaAsign"] }),
         toast.success(`Asignaste un usuario a la tarea ${currentTarea.titulo}`);
       setIsOpenDialog(false);
     }
@@ -59,8 +64,16 @@ export function SelectForm({ setIsOpenDialog, currentTarea }) {
 
   function onSubmit(data) {
     mutate({ asignadoId: data.userAsignado })
-
   }
+
+  useEffect(() => {
+    if (listaUsuarios && currentUser) {
+      console.log(currentUser, "xddddadasdasd")
+      const filtrados = listaUsuarios.filter(x => x.email?.toLowerCase() !== currentUser.currentUser.email?.toLowerCase());
+      setListaFiltrada(filtrados);
+    }
+  }, [listaUsuarios, currentUser]);
+
 
   return (
     <Form {...form}>
@@ -78,10 +91,9 @@ export function SelectForm({ setIsOpenDialog, currentTarea }) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {Array.isArray(listaUsuarios) &&
-                    listaUsuarios.map((user) => (
-                      <SelectItem key={user.id} value={user.id}>{user.nombre}</SelectItem>
-                    ))}
+                  {Array.isArray(listaFiltrada) && listaFiltrada.map((user) => (
+                    <SelectItem key={user.id} value={user.id}>{user.nombre}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormDescription>
