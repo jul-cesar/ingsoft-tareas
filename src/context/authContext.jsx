@@ -52,7 +52,7 @@ export const AuthFunction = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setCurrentUser(currentUser);
-        console.log(currentUser)
+
       } else {
         setCurrentUser(null);
       }

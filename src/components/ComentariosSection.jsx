@@ -6,6 +6,7 @@ import { formatDistanceToNow } from 'date-fns'
 import React, { useState } from 'react'
 import { es } from 'date-fns/locale'; // Importa el locale español si prefieres que la diferencia esté en español
 import { formatCustomDate } from '@/utils/fechaFormat';
+import { AvatarCom } from '@/demo/AvatarComments';
 
 
 const ComentariosSection = ({ listaComentarios, isLoading, currentUser }) => {
@@ -15,16 +16,16 @@ const ComentariosSection = ({ listaComentarios, isLoading, currentUser }) => {
 
             {!isLoading && Array.isArray(listaComentarios) ? (
                 listaComentarios.map((comentario) => (
-                    <div class="flex items-start gap-2.5" key={comentario.id}>
+                    <div className="flex items-start gap-2.5" key={comentario.id}>
 
-                        <AvatarDemo src={comentario?.author?.photoURL} />
-                        <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 m-2 border-gray-200  rounded-e-xl rounded-es-xl bg-gray-900">
-                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                <span class="text-sm font-semibold text-gray-900 dark:text-white">{comentario.author.nombre}</span>
-                                <span class="text-xs font-normal text-gray-500 dark:text-gray-400"> {formatCustomDate(comentario.fecha)}</span>
+                        <AvatarCom src={comentario?.author?.photoURL} author={comentario?.author} />
+                        <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 m-2 border-gray-200  rounded-e-xl rounded-es-xl bg-gray-900">
+                            <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                                <span className="text-sm font-semibold text-gray-900 dark:text-white">{comentario.author.nombre}</span>
+                                <span className="text-xs font-normal text-gray-500 dark:text-gray-400"> {formatCustomDate(comentario.fecha)}</span>
                             </div>
-                            <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{comentario.contenido}</p>
-                            <span class="text-sm font-normal text-gray-500 dark:text-gray-400"></span>
+                            <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{comentario.contenido}</p>
+                            <span className="text-sm font-normal text-gray-500 dark:text-gray-400"></span>
                         </div>
                         <DropdownComentarios comentarioData={comentario} />
 
@@ -36,7 +37,7 @@ const ComentariosSection = ({ listaComentarios, isLoading, currentUser }) => {
                     <svg
                         aria-hidden="true"
                         role="status"
-                        class="inline w-9 h-36 me-3 text-gray-200 self-center animate-spin dark:text-gray-600"
+                        className="inline w-9 h-36 me-3 text-gray-200 self-center animate-spin dark:text-gray-600"
                         viewBox="0 0 100 101"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"

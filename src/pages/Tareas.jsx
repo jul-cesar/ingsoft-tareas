@@ -32,7 +32,7 @@ const Tareas = () => {
 
 
   return (
-    <div className="h-screen w-full">
+    <div className="h-full w-full">
       <Navbar />
       <Tabs setShowTareas={setShowTareas} showTareas={showTareas} />
       <div className="text-center m-4">

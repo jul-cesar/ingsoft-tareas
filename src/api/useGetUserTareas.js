@@ -8,7 +8,6 @@ const useGetUserTareas = () => {
       console.error("Usuario actual no definido");
       return null;
     }
-    console.log(uid, "xdddd");
     const response = await fetch(`https://task-api-woad.vercel.app/${uid}`);
     const data = await response.json();
     return data;

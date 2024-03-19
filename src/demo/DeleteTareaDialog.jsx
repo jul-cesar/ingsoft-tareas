@@ -56,7 +56,7 @@ export function DeleteTareaDialog({ tareaInfo }) {
           ) : (
             <MiniLoading />
           )}
-          <Button type="submit">No</Button>
+          <Button type="submit" onClick={()=>setIsDialogOpen(!open)}>No</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
