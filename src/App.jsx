@@ -7,9 +7,12 @@ import Login from "./pages/Login";
 import { Route, Routes } from "react-router-dom";
 import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import { ThemeProvider } from "./components/theme-provides";
 
 function App() {
   return (
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+
     <AuthFunction>
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -24,6 +27,7 @@ function App() {
         />
       </Routes>
     </AuthFunction>
+    </ThemeProvider>
   );
 }
 

@@ -2,14 +2,15 @@ import { Auth } from "@/context/authContext";
 import { AvatarDemo } from "@/demo/Avatar";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Moon } from "lucide-react";
+import { ModeToggle } from "@/demo/ModeToggle";
 const Navbar = () => {
   const [openMenuProfile, setOpenMenuProfile] = useState(false);
   const { logOut, currentUser } = useContext(Auth);
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
+    <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:border-border dark:bg-background">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start rtl:justify-end">
@@ -52,7 +53,13 @@ const Navbar = () => {
             </a>
           </div>
           <div className="flex items-center">
-            <div className="flex items-center ms-3">
+            <div className="flex items-center ms-3 gap-2">
+              <div>
+
+
+              <ModeToggle/>
+
+              </div>
               <div>
                 {
                   <button
@@ -63,7 +70,7 @@ const Navbar = () => {
                     data-dropdown-toggle="dropdown-user"
                   >
                     <span className="sr-only">Open user menu</span>
-                    <AvatarDemo  src={currentUser?.photoURL}/>
+                    <AvatarDemo src={currentUser?.photoURL} />
                   </button>
                 }
               </div>

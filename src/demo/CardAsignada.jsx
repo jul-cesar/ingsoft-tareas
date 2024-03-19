@@ -46,11 +46,11 @@ function CardTarea({
             </CardHeader>
             <div className="flex items-center justify-between gap-2 m-4">
                 <div className="p-2">
-                    <Label>Estado:</Label>
+                    <Label>Estado: </Label>
                     <BadgeEstado>{estado?.toUpperCase()}</BadgeEstado>
                 </div>
                 <div className="p-2">
-                    <Label>Prioridad:</Label>
+                    <Label>Prioridad: </Label>
                     <BadgeEstado>{prioridad?.toUpperCase()}</BadgeEstado>
                 </div>
             </div>
